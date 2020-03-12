@@ -5,7 +5,16 @@ import axios from 'axios';
 
 const FormContainer = () => {
   return (
-    <div></div>
+    <Form>
+      <Field type="text" name="name" placeholder="name" />
+      <Field type="email" name="email" placeholder="email" />
+      <Field type="password" name="password" placeholder="password" />
+      <label>
+        <Field type="checkbox" name="tos" />
+        Accept Terms of Service
+      </label>
+      <button>Submit</button>
+    </Form>
   )
 }
 
