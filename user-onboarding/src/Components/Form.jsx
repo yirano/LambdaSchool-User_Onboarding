@@ -45,9 +45,13 @@ const FormikLoginForm = withFormik({
   handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
     axios.post('https://reqres.in/api/users', values)
       .then(res => {
-        console.log(res);
-        console.log(props);
-        props.setUser([...props.user, res]);
+        if (values.email === 'waffle@syrup.com') {
+          console.log("Email already taken");
+          setErrors({ email: "Email already taken!" })
+        } else {
+          console.log(res);
+          props.setUser([...props.user, res]);
+        }
       })
       .catch(err => {
         console.log(err);

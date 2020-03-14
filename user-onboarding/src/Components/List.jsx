@@ -7,9 +7,9 @@ const List = (props) => {
       {props.user.map(user => {
         return (
           <div>
-            <p>{user.data.name}</p>
-            <p>{user.data.password}</p>
-            <p>{user.data.email}</p>
+            <p>User: {user.data.name}</p>
+            <p>Password: {user.data.password}</p>
+            <p>Email: {user.data.email}</p>
           </div>
         )
       })}
