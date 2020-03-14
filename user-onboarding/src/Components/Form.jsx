@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup';
 import axios from 'axios';
 
-const FormContainer = ({ values, errors, touched, isSubmitting }) => {
+const FormContainer = ({ props, values, errors, touched, isSubmitting }) => {
+
   return (
     <Form>
       {touched.name && errors.name && <p>{errors.name}</p>}
@@ -22,6 +23,7 @@ const FormContainer = ({ values, errors, touched, isSubmitting }) => {
 }
 
 const FormikLoginForm = withFormik({
+
   mapPropsToValues({ name, email, password, tos }) {
     return {
       name: name || "",
@@ -39,7 +41,18 @@ const FormikLoginForm = withFormik({
     password: Yup.string()
       .min(12, "Password must be 12 characters or longer")
       .required("Password is required")
-  })
+  }),
+  handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
+    axios.post('https://reqres.in/api/users', values)
+      .then(res => {
+        console.log(res);
+        console.log(props);
+        props.setUser([...props.user, res]);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 })(FormContainer)
 
 export default FormikLoginForm;
