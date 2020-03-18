@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withFormik, Form, Formik, Field } from "formik";
+import { withFormik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
@@ -7,11 +7,11 @@ import styled from "styled-components";
 const FormContainer = ({ props, values, errors, touched, isSubmitting }) => {
   return (
     <Form className="form">
-      {touched.name && errors.name && <p>{errors.name}</p>}
+      <ErrorMessage name="name" />
       <Field className="field" type="text" name="name" placeholder="name" />
-      {touched.email && errors.email && <p>{errors.email}</p>}
+      <ErrorMessage name="email" />
       <Field className="field" type="email" name="email" placeholder="email" />
-      {touched.password && errors.password && <p>{errors.password}</p>}
+      <ErrorMessage name="password" />
       <Field
         className="field"
         type="password"
@@ -19,7 +19,7 @@ const FormContainer = ({ props, values, errors, touched, isSubmitting }) => {
         placeholder="password"
       />
       <label>
-        {touched.tos && errors.tos && <p>{errors.tos}</p>}
+        <ErrorMessage name="tos" />
         <Field className="field" id="checkbox" type="checkbox" name="tos" />
         Accept Terms of Service
       </label>
